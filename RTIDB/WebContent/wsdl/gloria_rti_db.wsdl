@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- *************************************** -->
+<!-- * Project: GLORIA                     * -->
+<!-- * Archive: gloria_rt_db.wsdl   * -->
+<!-- * Author: Juan Cabello                * -->
+<!-- * Date : 25/03/2013                   * -->
+<!-- *************************************** -->
+<wsdl:definitions xmlns:gloria.rt.entity.db="http://gloria.eu/rt/entity/db" xmlns:rti_db="http://gloria.eu/rti_db" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="gloria_rti_db" targetNamespace="http://gloria.eu/rti_db">
+	
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://gloria.eu/rti_db">
+
+			<xsd:import namespace="http://gloria.eu/rt/entity/db" schemaLocation="gloria_rti_db_entities.xsd"/>
+
+			<!-- BASIC TYPE RESPONSES - BEGIN -->
+
+			<xsd:element name="voidResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="stringResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="booleanResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:boolean"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="intResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:int"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="longResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:long"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="doubleResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:double"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- BASIC TYPE RESPONSES - END -->
+
+			<!-- ERROR - ELEMENTS - BEGIN -->
+
+			<xsd:simpleType name="errorType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="Unsupported"/>
+					<xsd:enumeration value="General"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:element name="errorDetail">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="type" type="rti_db:errorType"/>
+						<xsd:element name="code" type="xsd:integer"/>
+						<xsd:element name="desc" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- ERROR - ELEMENTS - BEGIN -->
+
+			<!-- SEARCH - ELEMENTS - BEGIN -->
+
+			<xsd:element name="opGet">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="uuid" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="opGetResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="0" name="out" type="gloria.rt.entity.db:observingPlan"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="fileGet">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="uuid" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="fileGetResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="0" name="out" type="gloria.rt.entity.db:file"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- SEARCH - ELEMENTS - END -->
+			
+			<!-- MANAGEMENT - ELEMENTS - BEGIN -->
+			<xsd:element name="opCreate">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="op" type="gloria.rt.entity.db:observingPlan"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="opCreateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="fileCreate">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="uuidOp" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="file" type="gloria.rt.entity.db:file"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="fileCreateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="uuidCreate">
+				<xsd:complexType>
+					<xsd:sequence>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="uuidCreateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="opDelete">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="uuid" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="fileDelete">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="uuid" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="fileAddFormat">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="uuidFile" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="format" type="gloria.rt.entity.db:fileFormat"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="sourceURL" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="fileDeleteFormat">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="uuidFile" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="format" type="gloria.rt.entity.db:fileFormat"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			
+			<!-- MANAGEMENT - ELEMENTS - END -->
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- ERROR MESSAGES - BEGIN -->
+	<wsdl:message name="rtiDbError">
+		<wsdl:part element="rti_db:errorDetail" name="rtiError">
+		</wsdl:part>
+	</wsdl:message>
+	<!-- ERROR MESSAGES - END -->
+
+	<!-- SEARCH - MESSAGES - BEGIN -->
+	<wsdl:message name="opGetRequest">
+		<wsdl:part element="rti_db:opGet" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="opGetResponse">
+		<wsdl:part element="rti_db:opGetResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="fileGetRequest">
+		<wsdl:part element="rti_db:fileGet" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="fileGetResponse">
+		<wsdl:part element="rti_db:fileGetResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+
+	<!-- SEARCH - MESSAGES - END -->
+	
+	<!-- MANAGEMENT - MESSAGES - BEGIN -->
+	<wsdl:message name="opCreateRequest">
+		<wsdl:part element="rti_db:opCreate" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="opCreateResponse">
+		<wsdl:part element="rti_db:opCreateResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="fileCreateRequest">
+		<wsdl:part element="rti_db:fileCreate" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="fileCreateResponse">
+		<wsdl:part element="rti_db:fileCreateResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="uuidCreateRequest">
+		<wsdl:part element="rti_db:uuidCreate" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="uuidCreateResponse">
+		<wsdl:part element="rti_db:uuidCreateResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="opDeleteRequest">
+		<wsdl:part element="rti_db:opDelete" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="opDeleteResponse">
+		<wsdl:part element="rti_db:voidResponse" name="parameters">
+    	</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="fileDeleteRequest">
+		<wsdl:part element="rti_db:fileDelete" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="fileDeleteResponse">
+		<wsdl:part element="rti_db:voidResponse" name="parameters">
+    	</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="fileAddFormatRequest">
+		<wsdl:part element="rti_db:fileAddFormat" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="fileAddFormatResponse">
+		<wsdl:part element="rti_db:voidResponse" name="parameters">
+    	</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="fileDeleteFormatRequest">
+		<wsdl:part element="rti_db:fileDeleteFormat" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="fileDeleteFormatResponse">
+		<wsdl:part element="rti_db:voidResponse" name="parameters">
+    	</wsdl:part>
+	</wsdl:message>
+	
+	<!-- MANAGEMENT - MESSAGES - END -->
+
+	<wsdl:portType name="gloria_rti_db">
+
+		<!-- SEARCH - PORT TYPE OPS - BEGIN -->
+
+		<wsdl:operation name="opGet">
+			<wsdl:documentation>
+				Gets the Observing Plan data.
+				@param uuid Identifier.
+				@return Observing Plan information
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:opGetRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:opGetResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileGet">
+			<wsdl:documentation>
+				Gets the file data.
+				@param uuid Identifier.
+				@return File information
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:fileGetRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:fileGetResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+
+		<!-- SEARCH - PORT TYPE OPS - END -->
+		
+		<!-- MANAGEMENT - PORT TYPE OPS - BEGIN -->
+		
+		<wsdl:operation name="opCreate">
+			<wsdl:documentation>
+				Creates a new Observing Plan.
+				@param op Observing Plan data.
+				@return UUID.
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:opCreateRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:opCreateResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileCreate">
+			<wsdl:documentation>
+				Creates a new File.
+				@param file file data.
+				@return UUID.
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:fileCreateRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:fileCreateResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="uuidCreate">
+			<wsdl:documentation>
+				Creates a new UUID.
+				@return UUID.
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:uuidCreateRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:uuidCreateResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="opDelete">
+			<wsdl:documentation>
+				Deletes an Observing Plan.
+				@param uuid Observing Plan uuid.
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:opDeleteRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:opDeleteResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileDelete">
+			<wsdl:documentation>
+				Deletes a file.
+				@param uuid File uuid.
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:fileDeleteRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:fileDeleteResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileAddFormat">
+			<wsdl:documentation>
+				Adds a format.
+				@param uuidFile File uuid.
+				@param format FormatType
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:fileAddFormatRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:fileAddFormatResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileDeleteFormat">
+			<wsdl:documentation>
+				Deletes a format.
+				@param uuidFile File uuid.
+				@param format FormatType
+				@throws RtiDbError In error case.
+			</wsdl:documentation>
+			<wsdl:input message="rti_db:fileDeleteFormatRequest">
+			</wsdl:input>
+			<wsdl:output message="rti_db:fileDeleteFormatResponse">
+			</wsdl:output>
+			<wsdl:fault message="rti_db:rtiDbError" name="error"/>
+		</wsdl:operation>
+		
+		<!-- MANAGEMENT - PORT TYPE OPS - END -->
+
+
+	</wsdl:portType>
+
+
+	<wsdl:binding name="gloria_rti_dbSOAP" type="rti_db:gloria_rti_db">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+		<wsdl:operation name="opGet">
+			<soap:operation soapAction="http://gloria.eu/rti_db/opGet"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="fileGet">
+			<soap:operation soapAction="http://gloria.eu/rti_db/fileGet"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="opCreate">
+			<soap:operation soapAction="http://gloria.eu/rti_db/opCreate"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileCreate">
+			<soap:operation soapAction="http://gloria.eu/rti_db/fileCreate"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="uuidCreate">
+			<soap:operation soapAction="http://gloria.eu/rti_db/uuidCreate"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="opDelete">
+			<soap:operation soapAction="http://gloria.eu/rti_db/opDelete"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileDelete">
+			<soap:operation soapAction="http://gloria.eu/rti_db/fileDelete"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileAddFormat">
+			<soap:operation soapAction="http://gloria.eu/rti_db/fileAddFormat"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="fileDeleteFormat">
+			<soap:operation soapAction="http://gloria.eu/rti_db/fileDeleteFormat"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+	<wsdl:service name="gloria_rti_db">
+		<wsdl:documentation/>
+		<wsdl:port binding="rti_db:gloria_rti_dbSOAP" name="gloria_rti_dbSOAP">
+			<soap:address location="http://localhost:8080/RTI_DB/services/gloria_rti_dbSOAP"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
